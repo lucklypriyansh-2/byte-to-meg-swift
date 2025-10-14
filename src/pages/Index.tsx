@@ -40,10 +40,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="w-full px-4 pb-12">
+    <div className="bg-background">
+      <div className="w-full px-4 pb-12">
         {/* Hero Section */}
         <section className="max-w-4xl mx-auto text-center py-8 md:py-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -70,10 +68,10 @@ const Index = () => {
         </section>
 
         {/* FAQ */}
-        <section>
+        <section className="mb-12 md:mb-16">
           <FAQ />
         </section>
-      </main>
+      </div>
 
       <Footer />
     </div>

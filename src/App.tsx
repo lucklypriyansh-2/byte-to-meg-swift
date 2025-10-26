@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Blogs from "./pages/Blogs";
 import Docs from "./pages/Docs";
 import Newsletter from "./pages/Newsletter";
+import { GuideDetail } from "./pages/GuideDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/guide/:guideId" element={<GuideDetail />} />
             <Route path="/blog" element={<Blogs />} />
             <Route path="/docs" element={<Docs />} />
             <Route path="/newsletter" element={<Newsletter />} />

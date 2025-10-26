@@ -65,17 +65,21 @@ export const FAQ = () => {
   }, []);
 
   return (
-    <Card className="w-full max-w-4xl mx-auto p-6 md:p-8 shadow-converter bg-card">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6">
+    <Card className="w-full max-w-4xl mx-auto p-6 md:p-8 shadow-xl shadow-primary/5 bg-card border-primary/10 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
         Frequently Asked Questions
       </h2>
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-full space-y-3">
         {faqs.map((faq, index) => (
-          <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger className="text-left font-semibold">
+          <AccordionItem 
+            key={index} 
+            value={`item-${index}`}
+            className="border border-primary/10 rounded-lg px-4 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:shadow-primary/10 data-[state=open]:border-primary/40 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10"
+          >
+            <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-300">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground leading-relaxed">
+            <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>

@@ -162,7 +162,7 @@ const Converter = ({ type }: { type: ConversionType }) => {
           placeholder={`Enter ${isReversed ? config.toUnit.split(" (")[0].toLowerCase() : config.fromUnit.toLowerCase()}...`}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="h-14 text-lg font-medium"
+          className="h-14 text-lg font-medium transition-all duration-300 focus:scale-[1.01] focus:shadow-lg focus:shadow-primary/10 border-primary/20 focus:border-primary/40"
           autoComplete="off"
         />
       </div>
@@ -173,26 +173,27 @@ const Converter = ({ type }: { type: ConversionType }) => {
           onClick={handleSwap}
           variant="outline"
           size="icon"
-          className="rounded-full h-10 w-10 transition-smooth hover:rotate-180"
+          className="rounded-full h-12 w-12 transition-all duration-500 hover:rotate-180 hover:scale-110 hover:shadow-lg hover:shadow-primary/20 border-primary/30 hover:border-primary hover:bg-primary/5"
           aria-label="Swap conversion direction"
         >
-          <ArrowLeftRight className="h-4 w-4" />
+          <ArrowLeftRight className="h-5 w-5 text-primary" />
         </Button>
       </div>
 
       {/* Results Section */}
       <div className="space-y-4">
         {/* Decimal Result */}
-        <div className="p-4 rounded-xl bg-[hsl(var(--result-bg))] border border-border transition-smooth">
+        <div className="group p-5 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:scale-[1.02] hover:border-primary/40">
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-sm font-semibold text-primary/80 mb-2 flex items-center gap-2">
                 {isReversed ? `${config.fromUnit} (Decimal)` : `${config.toUnit} - Decimal`}
+                <span className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary">Decimal</span>
               </p>
-              <p className="text-2xl md:text-3xl font-bold text-[hsl(var(--result-highlight))] truncate">
+              <p className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent truncate transition-transform duration-300 group-hover:scale-105">
                 {results.decimal}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-muted-foreground mt-2">
                 {config.decimalLabel}
               </p>
             </div>
@@ -200,11 +201,11 @@ const Converter = ({ type }: { type: ConversionType }) => {
               onClick={() => handleCopy(results.decimal, "decimal")}
               variant="ghost"
               size="icon"
-              className="shrink-0 transition-smooth"
+              className="shrink-0 transition-all duration-300 hover:bg-primary/10 hover:scale-110"
               aria-label="Copy to clipboard"
             >
               {copiedDecimal ? (
-                <Check className="h-5 w-5 text-accent" />
+                <Check className="h-5 w-5 text-accent animate-scale-in" />
               ) : (
                 <Copy className="h-5 w-5" />
               )}
@@ -213,16 +214,17 @@ const Converter = ({ type }: { type: ConversionType }) => {
         </div>
 
         {/* Binary Result */}
-        <div className="p-4 rounded-xl bg-[hsl(var(--result-bg))] border border-border transition-smooth">
+        <div className="group p-5 rounded-xl bg-gradient-to-br from-accent/5 to-primary/5 border border-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 hover:scale-[1.02] hover:border-accent/40">
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-muted-foreground mb-1">
+              <p className="text-sm font-semibold text-accent/80 mb-2 flex items-center gap-2">
                 {isReversed ? `${config.fromUnit} (Binary)` : `${config.toUnitBinary} - Binary`}
+                <span className="px-2 py-0.5 text-xs rounded-full bg-accent/10 text-accent">Binary</span>
               </p>
-              <p className="text-2xl md:text-3xl font-bold text-[hsl(var(--result-highlight))] truncate">
+              <p className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent truncate transition-transform duration-300 group-hover:scale-105">
                 {results.binary}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-muted-foreground mt-2">
                 {config.binaryLabel}
               </p>
             </div>
@@ -230,11 +232,11 @@ const Converter = ({ type }: { type: ConversionType }) => {
               onClick={() => handleCopy(results.binary, "binary")}
               variant="ghost"
               size="icon"
-              className="shrink-0 transition-smooth"
+              className="shrink-0 transition-all duration-300 hover:bg-accent/10 hover:scale-110"
               aria-label="Copy to clipboard"
             >
               {copiedBinary ? (
-                <Check className="h-5 w-5 text-accent" />
+                <Check className="h-5 w-5 text-accent animate-scale-in" />
               ) : (
                 <Copy className="h-5 w-5" />
               )}
@@ -248,16 +250,16 @@ const Converter = ({ type }: { type: ConversionType }) => {
 
 export const ByteConverter = () => {
   return (
-    <Card className="w-full max-w-2xl mx-auto p-6 md:p-8 shadow-converter bg-card">
+    <Card className="w-full max-w-2xl mx-auto p-6 md:p-8 shadow-xl shadow-primary/5 bg-card border-primary/10 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
       <Tabs defaultValue="byte-mb" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7 mb-6">
-          <TabsTrigger value="byte-mb" className="text-xs">B ↔ MB</TabsTrigger>
-          <TabsTrigger value="byte-kb" className="text-xs">B ↔ KB</TabsTrigger>
-          <TabsTrigger value="byte-gb" className="text-xs">B ↔ GB</TabsTrigger>
-          <TabsTrigger value="kb-mb" className="text-xs">KB ↔ MB</TabsTrigger>
-          <TabsTrigger value="kb-gb" className="text-xs">KB ↔ GB</TabsTrigger>
-          <TabsTrigger value="mb-gb" className="text-xs">MB ↔ GB</TabsTrigger>
-          <TabsTrigger value="gb-tb" className="text-xs">GB ↔ TB</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7 mb-6 bg-muted/50 p-1">
+          <TabsTrigger value="byte-mb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">B ↔ MB</TabsTrigger>
+          <TabsTrigger value="byte-kb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">B ↔ KB</TabsTrigger>
+          <TabsTrigger value="byte-gb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">B ↔ GB</TabsTrigger>
+          <TabsTrigger value="kb-mb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">KB ↔ MB</TabsTrigger>
+          <TabsTrigger value="kb-gb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">KB ↔ GB</TabsTrigger>
+          <TabsTrigger value="mb-gb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">MB ↔ GB</TabsTrigger>
+          <TabsTrigger value="gb-tb" className="text-xs transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white data-[state=active]:shadow-md">GB ↔ TB</TabsTrigger>
         </TabsList>
         
         <TabsContent value="byte-mb">

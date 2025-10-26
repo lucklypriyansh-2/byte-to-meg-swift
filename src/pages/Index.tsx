@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ByteConverter } from "@/components/ByteConverter";
 import { ConversionTable } from "@/components/ConversionTable";
 import { ExplanationPanel } from "@/components/ExplanationPanel";
 import { DesignGuidesSection } from "@/components/DesignGuidesSection";
 import { Footer } from "@/components/Footer";
-import { BookOpen, Wrench } from "lucide-react";
+import { FAQ } from "@/components/FAQ";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, BookOpen, Calculator } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("learn");
-
   useEffect(() => {
     // Add SoftwareApplication schema for SEO
     const script = document.createElement("script");
@@ -31,7 +32,7 @@ const Index = () => {
         ratingCount: "1523",
       },
       description:
-        "Master system design with interactive guides for Feature Flags, Scaling, OpenSearch, Machine Learning and more. Convert bytes to MB with instant precision.",
+        "Master system design with interactive guides. Convert bytes to MB with instant precision.",
     });
     document.head.appendChild(script);
 
@@ -43,100 +44,123 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="bg-background min-h-screen">
-      {/* Hero Section */}
-      <section className="relative px-4 py-16 md:py-24 lg:py-32 overflow-hidden">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 -z-10" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-teal-500/5 to-blue-500/5 rounded-full blur-3xl -z-10" />
-        
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-block mb-6 animate-fade-in">
-            <div className="px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/20 to-cyan-500/20 border border-teal-500/30">
-              <span className="text-sm font-semibold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                ⚡ Master System Design & Data Conversions
-              </span>
-            </div>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Ace <span className="bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 bg-clip-text text-transparent">Every Stage</span> of Your <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Technical Interview</span>
+    <div className="min-h-screen">
+      {/* Hero Section - Above the fold */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Floating orbs background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] animate-float" />
+          <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/10 blur-[120px] animate-float-delay" />
+        </div>
+
+        <div className="container mx-auto px-6 text-center space-y-8 animate-fade-in">
+          {/* Badge */}
+          <Badge 
+            variant="outline" 
+            className="px-4 py-2 text-sm border-primary/30 bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 transition-all duration-300"
+          >
+            <Sparkles className="w-4 h-4 mr-2 text-primary" />
+            System Design + Tools
+          </Badge>
+
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+            <span className="block mb-2">Learn System Design.</span>
+            <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+              Convert Bytes Instantly.
+            </span>
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-            Learn system design patterns with step-by-step interactive guides. Convert bytes instantly. Built by engineers for engineers.
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-slide-in-up animate-delay-100">
+            Master industry-proven system design patterns while using powerful conversion tools.
+            From URL shorteners to distributed caching — learn by doing.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => setActiveTab("learn")}
-              className="px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300 transform hover:scale-105">
-              Start Learning Today
-            </button>
-            <button 
-              onClick={() => setActiveTab("tools")}
-              className="px-8 py-4 border-2 border-teal-500/30 text-foreground font-semibold rounded-full hover:bg-teal-500/10 transition-all duration-300">
-              Explore Tools
-            </button>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-in-up animate-delay-200">
+            <Button 
+              size="lg"
+              className="px-8 h-14 text-lg bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-all duration-300 hover:scale-105 shadow-lg shadow-primary/25"
+              onClick={() => document.getElementById('guides')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <BookOpen className="w-5 h-5 mr-2" />
+              Start Learning
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="px-8 h-14 text-lg border-2 border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105"
+              onClick={() => document.getElementById('converter')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Calculator className="w-5 h-5 mr-2" />
+              Try Converter
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Main Content Tabs */}
-      <section className="px-4 py-12 md:py-16">
-        <div className="max-w-7xl mx-auto">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            {/* Tab Navigation */}
-            <div className="flex justify-center mb-12">
-              <TabsList className="bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-500/30 p-2">
-                <TabsTrigger 
-                  value="learn"
-                  className="gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  Learn System Design
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="tools"
-                  className="gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white"
-                >
-                  <Wrench className="w-4 h-4" />
-                  Conversion Tools
-                </TabsTrigger>
-              </TabsList>
-            </div>
-
-            {/* Learning Tab */}
-            <TabsContent value="learn" className="animate-in fade-in duration-300">
-              <DesignGuidesSection />
-            </TabsContent>
-
-            {/* Tools Tab */}
-            <TabsContent value="tools" className="animate-in fade-in duration-300">
-              <div className="space-y-16">
-                {/* Converter Section */}
-                <div className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-2xl p-8 md:p-12">
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                      Byte Converter
-                    </h2>
-                    <p className="text-muted-foreground text-lg">Convert bytes to MB with precision instantly</p>
-                  </div>
-                  <ByteConverter />
-                </div>
-
-                {/* Explanation */}
-                <div className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-2xl p-8 md:p-12">
-                  <ExplanationPanel />
-                </div>
-
-                {/* Conversion Table */}
-                <div className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-2xl p-8 md:p-12">
-                  <ConversionTable />
-                </div>
-              </div>
-            </TabsContent>
+      {/* Learning Navigation Tabs */}
+      <section className="py-12 border-y bg-muted/30 backdrop-blur-sm sticky top-16 z-40">
+        <div className="container mx-auto px-6">
+          <Tabs defaultValue="guides" className="w-full">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 h-14 bg-background/50 backdrop-blur-sm">
+              <TabsTrigger value="guides" className="text-sm md:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white">
+                Guides
+              </TabsTrigger>
+              <TabsTrigger value="patterns" className="text-sm md:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white">
+                Patterns
+              </TabsTrigger>
+              <TabsTrigger value="tools" className="text-sm md:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white">
+                Tools
+              </TabsTrigger>
+              <TabsTrigger value="quiz" className="text-sm md:text-base data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-white">
+                Quiz
+              </TabsTrigger>
+            </TabsList>
           </Tabs>
+        </div>
+      </section>
+
+      {/* Design Guides Section */}
+      <div id="guides">
+        <DesignGuidesSection />
+      </div>
+
+      {/* Converter Tool Section */}
+      <section id="converter" className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Byte Converter Tool
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Convert between bytes, kilobytes, megabytes, gigabytes, and terabytes with both decimal and binary calculations
+            </p>
+          </div>
+          <div className="animate-scale-in animate-delay-200">
+            <ByteConverter />
+          </div>
+        </div>
+      </section>
+
+      {/* Explanation Panel */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto animate-slide-in-up">
+          <ExplanationPanel />
+        </div>
+      </section>
+
+      {/* Conversion Table */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto animate-slide-in-up">
+          <ConversionTable />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto animate-fade-in">
+          <FAQ />
         </div>
       </section>
 

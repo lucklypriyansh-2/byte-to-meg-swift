@@ -11,11 +11,8 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full relative">
-        {/* Background gradient decoration */}
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-20 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
+        {/* Background gradient - subtle pattern */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-gradient-to-b from-background via-background to-muted/20" />
         
         <AppSidebar />
         
